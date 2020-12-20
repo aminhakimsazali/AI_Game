@@ -7,4 +7,4 @@
 | Muhamamd Akif Farhan| 17080476/2 |WID170029
 | Fedelic Mordecai Makain| 17123777/2 |WID170014
 
-# Big size video cant be uploaded on the Github. Hence, we include the vidoe link in the assignment README section. 
+# Big size video cannot be upload on the Github. Hence, we include the video link in the assignment README section. 
