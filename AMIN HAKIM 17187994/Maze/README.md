@@ -4,12 +4,6 @@
 
 
 # Results
-```
-<div>
-<img src="Maze 1.jpg" width="100" height="100"/>
-</div>
-```
-
 ![Result 1](https://github.com/aminhakimsazali/AI_Game/blob/main/AMIN%20HAKIM%2017187994/Maze/Maze%201.jpg?raw=true = 100X100)
 ![Result 2](https://github.com/aminhakimsazali/AI_Game/blob/main/AMIN%20HAKIM%2017187994/Maze/Maze%202.jpg?raw=true =50X50)
 ![Result 3](https://github.com/aminhakimsazali/AI_Game/blob/main/AMIN%20HAKIM%2017187994/Maze/Maze%203.jpg?raw=true)
