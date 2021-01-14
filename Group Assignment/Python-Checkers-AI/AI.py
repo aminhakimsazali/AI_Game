@@ -11,7 +11,7 @@ class AI:
     def explored_node(self):
         return self.totalnodes
 
-    def minimax(self, position, depth, alpha, beta, max_player, game):
+    def minimax(self, position, depth, alpha, beta, max_player, turn, game):
         self.totalnodes+=1
         if depth == 0 or position.winner() != None:
             return position.evaluate(), position
@@ -19,8 +19,8 @@ class AI:
         if max_player:
             maxEval = float('-inf')
             best_move = None
-            for move in self.get_all_moves(position, WHITE, game):
-                evaluation = self.minimax(move, depth-1, alpha, beta, False, game)[0]
+            for move in self.get_all_moves(position, turn, game):
+                evaluation = self.minimax(move, depth-1, alpha, beta, False, turn, game)[0]
                 maxEval = max(maxEval, evaluation)
                 alpha = max(alpha, evaluation)
                 if beta <= alpha:
@@ -32,8 +32,8 @@ class AI:
         else:
             minEval = float('inf')
             best_move = None
-            for move in self.get_all_moves(position, RED, game):
-                evaluation = self.minimax(move, depth-1,alpha, beta,  True, game)[0]
+            for move in self.get_all_moves(position, turn, game):
+                evaluation = self.minimax(move, depth-1, alpha, beta, True, turn, game)[0]
                 minEval = min(minEval, evaluation)
                 beta = min(beta, evaluation)
                 if beta <= alpha:
