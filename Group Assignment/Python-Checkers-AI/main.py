@@ -21,18 +21,29 @@ def main():
     clock = pygame.time.Clock()
     game = Game(WIN)
     AIbot = AI()
-
+    no_moves = False
     while run:
         clock.tick(FPS)
         
         
         if game.turn == WHITE:
-            value, new_board = AIbot.minimax( game.get_board(), 4,float('-inf'), float('inf'), WHITE, game)
-            game.ai_move(new_board)
+            value, new_board = AIbot.minimax(game.get_board(), 4, float('-inf'), float('inf'), False, WHITE, game)
+            if (new_board is not None):
+                game.ai_move(new_board)
+            else:
+                no_moves=True
+
 
         if game.winner() != None:
             print(game.winner())
             run = False
+        if no_moves == True:
+            if game.turn == RED:
+                print("WHITE Wins!")
+            else:
+                print("RED Wins!")
+            run = False
+
 
         for event in pygame.event.get():
 
