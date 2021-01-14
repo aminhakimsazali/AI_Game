@@ -53,40 +53,47 @@ def main():
             if(game.winner() == RED):
                 if(start_side[0]==RED):
                     p1_wins+=1
+                    print("RED Wins! (Agent 1)")
                 else:
                     p2_wins+=1
-                print("RED Wins!")
+                    print("RED Wins! (Agent 2)")
+
             else:
                 if(start_side[0]==WHITE):
                     p1_wins+=1
+                    print("WHITE Wins! (Agent 1)")
                 else:
                     p2_wins+=1
-                print("WHITE Wins!")
+                    print("WHITE Wins! (Agent 1)")
             curr_round += 1
             if (curr_round >= rounds):
                 run = False
             else:
+                swapSide(start_side)
                 game.reset()
 
 
         if no_moves == True:
             if game.turn == RED:
                 if(start_side[0]==RED):
-                    p1_wins+=1
-                else:
                     p2_wins+=1
-                print("WHITE Wins!")
+                    print("WHITE Wins! (Agent 2)")
+                else:
+                    p1_wins+=1
+                    print("WHITE Wins! (Agent 1)")
             else:
                 if(start_side[0]==WHITE):
-                    p1_wins+=1
+                    p2_wins += 1
+                    print("RED Wins! (Agent 2)")
                 else:
-                    p2_wins+=1
-                print("RED Wins!")
+                    p1_wins += 1
+                    print("RED Wins! (Agent 1)")
             curr_round += 1
             if (curr_round >= rounds):
                 run = False
             else:
                 game.reset()
+                swapSide(start_side)
                 no_moves = False
 
 
@@ -108,6 +115,9 @@ def main():
     print("Player 2 Win count: " + str(p2_wins))
     pygame.quit()
 
-
+def swapSide(sides):
+    temp = sides[0]
+    sides[0] = sides[1]
+    sides[1] = temp
 
 main()
