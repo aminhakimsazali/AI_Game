@@ -14,7 +14,7 @@ class AI:
     def minimax(self, position, depth, alpha, beta, max_player, turn, game):
         self.totalnodes+=1
         if depth == 0 or position.winner() != None:
-            return position.evaluate(), position
+            return self.evalState(position, turn), position
         
         if max_player:
             maxEval = float('-inf')
@@ -43,6 +43,25 @@ class AI:
             
             return minEval, best_move
 
+
+    def evalState(self, move, turn):
+        score = 0
+        board = move.board
+        c_x = -1
+        for x in board:
+            c_y = -1
+            c_x += 1
+            for y in x:
+                c_y += 1
+                if (y == turn and c_x == 0):
+                    score += 4
+                elif (y == turn and c_x == 7):
+                    score += 4
+                elif (y == turn):
+                    score += 2
+                elif (y != turn and y != 0):
+                    score -= 3
+        return score
 
     def simulate_move(self, piece, move, board, game, skip):
         board.move(piece, move[0], move[1])
