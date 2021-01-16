@@ -7,7 +7,7 @@ from AI import AI
 FPS = 60
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Programming Project - Assignment 1 Knowledge & Reasoning 2020/21 ')
+pygame.display.set_caption('AI_GAME - Solving Checkers with Minimax Alpha Beta Pruning')
 # screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 def get_row_col_from_mouse(pos):
@@ -24,8 +24,8 @@ def main():
     no_moves = False
     while run:
         clock.tick(FPS)
-        
-        
+
+
         if game.turn == WHITE:
             value, new_board = AIbot.minimax(game.get_board(), 4, float('-inf'), float('inf'), False, WHITE, game)
             if (new_board is not None):
@@ -50,7 +50,7 @@ def main():
             if event.type == pygame.QUIT:
                 print("Explored node: ", AIbot.explored_node())
                 run = False
-            
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print("Explored node: ", AIbot.explored_node())
                 pos = pygame.mouse.get_pos()
@@ -58,7 +58,7 @@ def main():
                 game.select(row, col)
 
         game.update()
-    
+
     pygame.quit()
 
 main()
