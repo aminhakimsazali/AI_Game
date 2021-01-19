@@ -27,16 +27,22 @@ def main():
     AIbot2 = AI2()
     start_side = [WHITE,RED]
     no_moves = False
-
+    start = time.time()
     p1_wins = 0
     p2_wins = 0
     draw_count = 0
     rounds = 10
     curr_round = 0
-
+    timeout = 6000
     agent1_name ="Minimax with A-B Pruning"
     agent2_name ="Monte Carlo Tree Search"
+    outoftime = False
     while run:
+        current_time = time.time()
+
+        if(current_time-start >= timeout):
+            outoftime = True
+
         clock.tick(FPS)
         if game.turn == start_side[0]:
             value, new_board = AIbot.minimax(game.get_board(), 4, float('-inf'), float('inf'), True,  start_side[0], game)
@@ -52,12 +58,13 @@ def main():
             else:
                 no_moves=True
         board = game.get_board()
-        if(board.red_left == 1 and board.white_left == 1 and board.white_kings == 1 and board.red_kings == 1):
+        if((board.red_left == 1 and board.white_left == 1 and board.white_kings == 1 and board.red_kings == 1) or outoftime):
+            start = time.time()
+            outoftime = False
             print("Draw Game")
             draw_count+=1
             swapSide(start_side)
             game.reset()
-
 
         if game.winner() != None:
             if(game.winner() == RED):
@@ -105,18 +112,6 @@ def main():
                 game.reset()
                 swapSide(start_side)
                 no_moves = False
-
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                print("Explored node: ", AIbot.explored_node())
-                run = False
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                print("Explored node: ", AIbot.explored_node())
-                pos = pygame.mouse.get_pos()
-                row, col = get_row_col_from_mouse(pos)
-                game.select(row, col)
 
         game.update()
 
