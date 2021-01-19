@@ -28,16 +28,23 @@ def main():
     Basebot = BASE()
     start_side = [WHITE,RED]
     no_moves = False
-
+    timeout = 6000
+    start = time.time()
     p1_wins = 0
     p2_wins = 0
     draw_count = 0
     rounds = 10
     curr_round = 0
+    outoftime = False
 
     agent1_name ="Minimax with A-B Pruning"
     agent2_name ="Random Move"
     while run:
+        current_time = time.time()
+
+        if (current_time - start >= timeout):
+            outoftime = True
+
         clock.tick(FPS)
         if game.turn == start_side[0]:
             value, new_board = AIbot.minimax(game.get_board(), 4, float('-inf'), float('inf'), True,  start_side[0], game)
@@ -53,9 +60,11 @@ def main():
             else:
                 no_moves=True
         board = game.get_board()
-        if(board.red_left == 1 and board.white_left == 1 and board.white_kings == 1 and board.red_kings == 1):
+        if ((board.red_left == 1 and board.white_left == 1 and board.white_kings == 1 and board.red_kings == 1) or outoftime):
+            start = time.time()
+            outoftime = False
             print("Draw Game")
-            draw_count+=1
+            draw_count += 1
             swapSide(start_side)
             game.reset()
 
