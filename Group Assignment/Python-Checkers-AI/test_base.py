@@ -8,7 +8,7 @@ import time
 FPS = 60
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Programming Project - Assignment 1 Knowledge & Reasoning 2020/21 ')
+pygame.display.set_caption('AI Checkers ')
 
 
 # screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -37,6 +37,8 @@ def main():
 
     agent1_name ="Minimax with A-B Pruning"
     agent2_name ="Random Move"
+
+    start_time = time.time()
     while run:
         clock.tick(FPS)
         if game.turn == start_side[0]:
@@ -57,6 +59,7 @@ def main():
             print("Draw Game")
             draw_count+=1
             swapSide(start_side)
+            start_time = time.time()
             game.reset()
 
 
@@ -81,6 +84,7 @@ def main():
                 run = False
             else:
                 swapSide(start_side)
+                start_time = time.time()
                 game.reset()
 
 
@@ -103,9 +107,67 @@ def main():
             if (curr_round >= rounds):
                 run = False
             else:
+                start_time = time.time()
                 game.reset()
                 swapSide(start_side)
                 no_moves = False
+        
+        # print(time.time()-start_time)
+        elapsed_time = int(time.time()-start_time)
+
+        if elapsed_time > 100:
+
+            print("Time out")
+            # calculate each score for each agent
+            agent1_piece_count = 0
+            agent1_king_count = 0
+            agent2_king_count = 0
+            agent2_piece_count = 0
+
+            board = game.get_board()
+            
+
+            if (start_side[0] == RED):
+                color_1 = "RED"
+                color_2 = "WHITE"
+                agent1_king_count = board.red_kings
+                agent1_piece_count = board.red_left
+
+                agent2_king_count = board.white_kings
+                agent2_piece_count = board.white_left
+            else:
+                color_1 = "WHITE"
+                color_2 = "RED"
+                agent1_piece_count = board.white_left
+                agent1_king_count =  board.white_kings
+                agent2_piece_count = board.red_left
+                agent2_king_count =  board.red_kings
+            
+            agent1_score = agent1_piece_count + agent1_king_count*2
+            agent2_score = agent2_piece_count + agent2_king_count*2
+            
+
+            if agent1_score > agent2_score:
+                 print("{} Wins! (Agent 1 - ".format(color_1) + agent1_name + " )")
+                 p1_wins+=1
+            elif agent2_score > agent1_score:
+                p2_wins += 1
+                print("{} Wins! (Agent 2 - ".format(color_2) + agent2_name + " )")
+            else:
+                print("Draw Game")
+                draw_count+=1            
+
+            curr_round += 1
+            if (curr_round >= rounds):
+                run = False
+            else:
+                start_time = time.time()
+                game.reset()
+                swapSide(start_side)
+                no_moves = False
+
+            
+
 
 
         for event in pygame.event.get():
