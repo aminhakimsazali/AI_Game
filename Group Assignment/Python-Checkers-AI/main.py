@@ -7,7 +7,7 @@ from AI import AI
 FPS = 60
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('AI_GAME - Solving Checkers with Minimax Alpha Beta Pruning')
+pygame.display.set_caption('AI Checkers')
 # screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 def get_row_col_from_mouse(pos):

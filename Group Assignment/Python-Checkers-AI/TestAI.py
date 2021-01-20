@@ -7,7 +7,7 @@ import time
 FPS = 60
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Programming Project - Assignment 1 Knowledge & Reasoning 2020/21 ')
+pygame.display.set_caption('AI Checkers ')
 
 
 # screen = pygame.display.set_mode((WIDTH, HEIGHT))
